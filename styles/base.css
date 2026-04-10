@@ -12,7 +12,8 @@ body {
   align-items: center;
   background: radial-gradient(circle at top, rgba(64, 158, 255, 0.18), transparent 32%),
               linear-gradient(180deg, #e8eefc 0%, #f7f8fa 100%);
-  padding: 5vh 20vw;
+  /* 核心修改：上下仅留5%空白，左右自适应（设为2vw保证小屏也有边距） */
+  padding: 5vh 2vw;
 }
 
 .wrapper {
@@ -20,16 +21,21 @@ body {
   border: 1px solid rgba(79, 97, 168, 0.12);
   border-radius: 24px;
   box-shadow: 0 32px 90px rgba(30, 63, 125, 0.14);
-  width: min(1360px, 100%);
-  max-width: 100%;
-  max-height: 90vh;
-  height: 100%;
+  /* 宽度：最大1360px，最小自适应，占满可用宽度 */
+  width: 100%;
+  max-width: 1360px;
+  /* 高度：占满上下5%空白后的剩余高度，最大90vh（刚好匹配5%上下） */
+  height: 90vh;
+  /* 移除不必要的max-height，用height:90vh直接匹配上下5%空白 */
   margin: 0 auto;
   padding: 28px;
   display: flex;
   flex-direction: column;
+  /* 确保容器不会超出可视区域 */
+  max-height: 90vh;
 }
 
+/* 其余样式保持不变 */
 header {
   text-align: center;
   margin-bottom: 24px;

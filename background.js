@@ -1,12 +1,30 @@
-﻿const managerTabIds = new Set();
+﻿// background.js
+const managerTabIds = new Set();
+const managerUrl = chrome.runtime.getURL("manager.html");
 
 // 点击插件图标  打开新标签页形式的管理器
 chrome.action.onClicked.addListener(() => {
-  openManagerPage();
+  toggleManagerPage();
 });
 
+async function toggleManagerPage() {
+  const tabs = await chrome.tabs.query({ url: managerUrl });
+  if (tabs.length) {
+    // 存在则关闭所有管理页
+    const ids = tabs.map(tab => tab.id).filter(Boolean);
+    await chrome.tabs.remove(ids);
+    ids.forEach(id => managerTabIds.delete(id));
+  } else {
+    // 不存在则打开
+    const tab = await chrome.tabs.create({ url: managerUrl, active: true });
+    if (tab && tab.id) {
+      managerTabIds.add(tab.id);
+    }
+  }
+}
+
+// 替换原有 openManagerPage 函数
 async function openManagerPage() {
-  const managerUrl = chrome.runtime.getURL("manager.html");
   const tabs = await chrome.tabs.query({ url: managerUrl });
   if (tabs.length) {
     const tab = tabs[0];
@@ -21,18 +39,14 @@ async function openManagerPage() {
   }
 }
 
-function isManagerTab(tab) {
-  const managerUrl = chrome.runtime.getURL("manager.html");
-  if (!tab) return false;
-  return tab.id && managerTabIds.has(tab.id) || tab.url === managerUrl || tab.pendingUrl === managerUrl;
-}
-
+// 快捷键监听修改为调用 toggleManagerPage
 chrome.commands.onCommand.addListener((command) => {
   if (command === "open-manager") {
-    openManagerPage();
+    toggleManagerPage();
   }
 });
 
+// 其余代码保持不变...
 chrome.tabs.onActivated.addListener(async (activeInfo) => {
   const activeTab = await chrome.tabs.get(activeInfo.tabId);
   if (isManagerTab(activeTab)) return;
@@ -44,18 +58,23 @@ chrome.tabs.onActivated.addListener(async (activeInfo) => {
   }
 });
 
+function isManagerTab(tab) {
+  if (!tab) return false;
+  return tab.id && managerTabIds.has(tab.id) || tab.url === managerUrl || tab.pendingUrl === managerUrl;
+}
+
 chrome.tabs.onRemoved.addListener((tabId) => {
   managerTabIds.delete(tabId);
 });
 
 chrome.tabs.onCreated.addListener((tab) => {
-  if (tab.url === chrome.runtime.getURL("manager.html") || tab.pendingUrl === chrome.runtime.getURL("manager.html")) {
+  if (tab.url === managerUrl || tab.pendingUrl === managerUrl) {
     managerTabIds.add(tab.id);
   }
 });
 
 chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
-  if (tab.url === chrome.runtime.getURL("manager.html") || tab.pendingUrl === chrome.runtime.getURL("manager.html")) {
+  if (tab.url === managerUrl || tab.pendingUrl === managerUrl) {
     managerTabIds.add(tabId);
   }
 });

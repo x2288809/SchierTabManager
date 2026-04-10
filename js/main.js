@@ -1,7 +1,8 @@
 import { state } from "./state.js";
 import { initGroups, renderGroupList, renderHeader, addGroup, addSiteToCurrentGroup, exportGroups, importGroups } from "./groupManager.js";
 import { attachDialogEvents } from "./dialog.js";
-import { renderTabs, closeOtherTabs, closeDuplicateTabs } from "./tabs.js";
+import { renderTabs, closeDuplicateTabs } from "./tabs.js";
+import { initLanguage, applyLocale, toggleLanguage } from "./i18n.js";
 
 function attachEvents() {
   document.getElementById("addGroupBtn").addEventListener("click", async () => {
@@ -44,17 +45,22 @@ function attachEvents() {
     });
   }
 
-  document.getElementById("closeOthers").addEventListener("click", async () => {
-    await closeOtherTabs();
-    await renderGroupList();
-    await renderTabs(state.currentSearch);
-  });
-
   document.getElementById("closeDuplicate").addEventListener("click", async () => {
     await closeDuplicateTabs();
     await renderGroupList();
     await renderTabs(state.currentSearch);
   });
+
+  const languageToggleBtn = document.getElementById("languageToggle");
+  if (languageToggleBtn) {
+    languageToggleBtn.addEventListener("click", async () => {
+      toggleLanguage();
+      applyLocale();
+      await renderGroupList();
+      renderHeader();
+      await renderTabs(state.currentSearch);
+    });
+  }
 
   window.addEventListener("click", (e) => {
     const groupMenuEl = document.getElementById("groupMenu");
@@ -79,6 +85,8 @@ function attachEvents() {
 }
 
 async function init() {
+  initLanguage();
+  applyLocale();
   await initGroups();
   await renderGroupList();
   renderHeader();

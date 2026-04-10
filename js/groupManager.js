@@ -1,6 +1,7 @@
 import { state } from "./state.js";
 import { DEFAULT_GROUP_ID, DEFAULT_GROUP_NAME, getStoredGroups, saveStoredGroups, getAllTabs } from "./storage.js";
 import { openDialog } from "./dialog.js";
+import { t } from "./i18n.js";
 
 export function getSelectedGroup() {
   if (state.selectedGroupId === DEFAULT_GROUP_ID) {
@@ -19,7 +20,7 @@ export async function renderGroupList() {
   const openCount = tabs.length;
   groupList.innerHTML = "";
 
-  const openEntry = createGroupEntry(DEFAULT_GROUP_ID, DEFAULT_GROUP_NAME, openCount, true);
+  const openEntry = createGroupEntry(DEFAULT_GROUP_ID, t("defaultGroupName"), openCount, true);
   groupList.appendChild(openEntry);
 
   state.groups.forEach((group) => {
@@ -41,7 +42,7 @@ function createGroupEntry(id, name, count, isDefault) {
 
   const label = document.createElement("div");
   label.className = "group-label";
-  label.innerHTML = `<div class="group-name">${name}</div><span class="group-count">${count} 项</span>`;
+  label.innerHTML = `<div class="group-name">${name}</div><span class="group-count">${t("groupCount", { count })}</span>`;
 
   const controls = document.createElement("div");
   controls.className = "group-controls";
@@ -49,7 +50,7 @@ function createGroupEntry(id, name, count, isDefault) {
   if (!isDefault) {
     const editBtn = document.createElement("button");
     editBtn.textContent = "✎";
-    editBtn.title = "编辑分组";
+    editBtn.title = t("editGroup");
     editBtn.addEventListener("click", async (e) => {
       e.stopPropagation();
       await editGroup(id);
@@ -57,7 +58,7 @@ function createGroupEntry(id, name, count, isDefault) {
 
     const deleteBtn = document.createElement("button");
     deleteBtn.textContent = "🗑";
-    deleteBtn.title = "删除分组";
+    deleteBtn.title = t("deleteGroup");
     deleteBtn.addEventListener("click", async (e) => {
       e.stopPropagation();
       await deleteGroup(id);
@@ -76,24 +77,24 @@ export function renderHeader() {
   const addSiteBtn = document.getElementById("addSiteBtn");
   const group = getSelectedGroup();
 
-  titleEl.textContent = group.name;
+  titleEl.textContent = state.selectedGroupId === DEFAULT_GROUP_ID ? t("defaultGroupName") : group.name;
 
   if (state.selectedGroupId === DEFAULT_GROUP_ID) {
-    hintEl.textContent = "悬停标签可显示快捷操作，点击 + 添加到分组。";
+    hintEl.textContent = t("groupHintOpenTabs");
     addSiteBtn.classList.add("hidden");
   } else {
-    hintEl.textContent = "当前为分组内容，可编辑、删除网站，或手动新增网址。";
+    hintEl.textContent = t("groupHintGroupContent");
     addSiteBtn.classList.remove("hidden");
   }
 }
 
 export async function addGroup() {
   const values = await openDialog({
-    title: "新增分组",
+    title: t("newGroup"),
     fields: [
-      { name: "name", label: "分组名称", placeholder: "请输入分组名称", value: "" }
+      { name: "name", label: t("groupName"), placeholder: t("enterGroupName"), value: "" }
     ],
-    confirmText: "创建"
+    confirmText: t("create")
   });
 
   if (!values || !values.name) return;
@@ -114,11 +115,11 @@ export async function editGroup(id) {
   if (!group) return;
 
   const values = await openDialog({
-    title: "编辑分组",
+    title: t("editGroup"),
     fields: [
-      { name: "name", label: "分组名称", placeholder: "请输入分组名称", value: group.name }
+      { name: "name", label: t("groupName"), placeholder: t("enterGroupName"), value: group.name }
     ],
-    confirmText: "保存"
+    confirmText: t("save")
   });
 
   if (!values || !values.name) return;
@@ -128,7 +129,7 @@ export async function editGroup(id) {
 }
 
 export async function deleteGroup(id) {
-  if (!confirm("确认删除此分组？此操作无法撤销。")) return;
+  if (!confirm(t("confirmDeleteGroup"))) return;
 
   state.groups = state.groups.filter((group) => group.id !== id);
   await saveStoredGroups(state.groups);
@@ -144,12 +145,12 @@ export async function addSiteToCurrentGroup() {
   if (!group) return;
 
   const values = await openDialog({
-    title: "新增网站到分组",
+    title: t("addWebsiteToGroup"),
     fields: [
-      { name: "title", label: "网站名称", placeholder: "请输入网站名称", value: "" },
-      { name: "url", label: "网站地址", placeholder: "请输入完整网址，例如 https://example.com", value: "" }
+      { name: "title", label: t("websiteName"), placeholder: t("enterWebsiteName"), value: "" },
+      { name: "url", label: t("websiteUrl"), placeholder: t("enterWebsiteUrl"), value: "" }
     ],
-    confirmText: "添加"
+    confirmText: t("add")
   });
 
   if (!values || !values.url) return;
@@ -176,12 +177,12 @@ export async function editGroupItem(itemId) {
   if (!item) return;
 
   const values = await openDialog({
-    title: "编辑网站",
+    title: t("editUrlBtnTitle"),
     fields: [
-      { name: "title", label: "网站名称", placeholder: "请输入网站名称", value: item.title },
-      { name: "url", label: "网站地址", placeholder: "请输入完整网址，例如 https://example.com", value: item.url }
+      { name: "title", label: t("websiteName"), placeholder: t("enterWebsiteName"), value: item.title },
+      { name: "url", label: t("websiteUrl"), placeholder: t("enterWebsiteUrl"), value: item.url }
     ],
-    confirmText: "保存"
+    confirmText: t("save")
   });
 
   if (!values || !values.title || !values.url) return;
@@ -224,16 +225,16 @@ export async function importGroups(file) {
       throw new Error("invalid format");
     }
 
-    if (!confirm("导入将覆盖当前本地分组数据，是否继续？")) {
+    if (!confirm(t("importConfirm"))) {
       return;
     }
 
     state.groups = data;
     state.selectedGroupId = DEFAULT_GROUP_ID;
     await saveStoredGroups(state.groups);
-    alert("分组数据已导入。");
+    alert(t("importSuccess"));
   } catch (error) {
-    alert("导入失败：文件格式不正确。");
+    alert(t("importFail"));
   }
 }
 

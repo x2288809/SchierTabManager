@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿<!-- manager.html -->
+<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
@@ -10,19 +11,25 @@
 </head>
 <body>
   <div class="wrapper">
+    <!-- 新增头部操作区 -->
+    <div class="global-actions">
+      <button id="languageToggle" class="secondary language-btn">English</button>
+      <button id="importGroups" class="secondary import-btn" data-i18n="importData">导入数据</button>
+      <button id="exportGroups" class="export-btn" data-i18n="exportData">导出数据</button>
+    </div>
     <header>
-      <h1>🏷️ SchierTabManager 标签管理器</h1>
-      <div class="shortcut-note">快捷打开管理页：默认 Ctrl+Q，可在浏览器扩展快捷键设置中自定义。</div>
+      <h1 data-i18n="appTitle">🏷️ SchierTabManager 标签管理器</h1>
+      <div class="shortcut-note" data-i18n="shortcutNote">快捷打开/关闭管理页：默认 Ctrl+Q，可在浏览器扩展快捷键设置中自定义。</div>
     </header>
 
     <div class="content">
       <aside class="side-panel">
         <div class="side-header">
           <div>
-            <h2>分组管理</h2>
-            <p>管理你的标签分组</p>
+            <h2 data-i18n="groupManagement">分组管理</h2>
+            <p data-i18n="groupManagementHint">管理你的标签分组</p>
           </div>
-          <button id="addGroupBtn" class="primary">+ 新增分组</button>
+          <button id="addGroupBtn" class="primary" data-i18n="addGroup">+ 新增分组</button>
         </div>
         <div id="groupList" class="group-list"></div>
       </aside>
@@ -34,20 +41,18 @@
             <p id="groupHint" class="group-hint">右键已打开的标签，可直接添加到分组。</p>
           </div>
           <div class="group-actions">
-            <button id="addSiteBtn" class="secondary hidden"> 新增网站</button>
+            <button id="addSiteBtn" class="secondary hidden" data-i18n="addSite"> 新增网站</button>
           </div>
         </div>
 
         <div class="search-box">
-          <input id="search" placeholder="搜索标签标题或网址..." autocomplete="off" />
+          <input id="search" placeholder="搜索标签标题或网址..." data-i18n-placeholder="searchPlaceholder" autocomplete="off" />
         </div>
 
         <div class="toolbar">
-          <button id="closeOthers">关闭其他标签</button>
-          <button id="closeDuplicate">去重标签</button>
-          <button id="refresh">刷新列表</button>
-          <button id="importGroups" class="secondary">导入数据</button>
-          <button id="exportGroups">导出数据</button>
+          <button id="closeDuplicate" data-i18n="closeDuplicate">去重标签</button>
+          <button id="refresh" data-i18n="refresh">刷新列表</button>
+          <!-- 移除原有导入/导出按钮 -->
         </div>
 
         <div class="container">
@@ -62,13 +67,13 @@
   <div id="dialogOverlay" class="dialog-overlay hidden">
     <div class="dialog-box">
       <div class="dialog-header">
-        <div id="dialogTitle">提示</div>
+        <div id="dialogTitle" data-i18n="dialogTitle">提示</div>
         <button id="dialogClose" class="dialog-close">×</button>
       </div>
       <div id="dialogBody" class="dialog-body"></div>
       <div class="dialog-actions">
-        <button id="dialogCancel" class="secondary">取消</button>
-        <button id="dialogConfirm" class="primary">确定</button>
+        <button id="dialogCancel" class="secondary" data-i18n="dialogCancel">取消</button>
+        <button id="dialogConfirm" class="primary" data-i18n="dialogConfirm">确定</button>
       </div>
     </div>
   </div>

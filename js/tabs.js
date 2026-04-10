@@ -1,6 +1,7 @@
 import { state } from "./state.js";
 import { DEFAULT_GROUP_ID, defaultIcon, formatUrl, getAllTabs, saveStoredGroups } from "./storage.js";
 import { getSelectedGroup, editGroupItem, deleteGroupItem, hideGroupMenu } from "./groupManager.js";
+import { t } from "./i18n.js";
 
 const groupMenuEl = document.getElementById("groupMenu");
 
@@ -18,7 +19,7 @@ export async function renderTabs(keyword = "") {
     });
 
     if (!filtered.length) {
-      tabList.innerHTML = '<div class="no-data">当前没有匹配的已打开标签。</div>';
+      tabList.innerHTML = `<div class="no-data">${t("noMatchedTabs")}</div>`;
       return;
     }
 
@@ -46,7 +47,7 @@ export async function renderTabs(keyword = "") {
       const addBtn = document.createElement("button");
       addBtn.className = "icon-button add-to-group";
       addBtn.textContent = "+";
-      addBtn.title = "添加到分组";
+      addBtn.title = t("addToGroupBtnTitle");
       addBtn.addEventListener("click", async (e) => {
         e.stopPropagation();
         showAddToGroupMenu(e.pageX, e.pageY, tab);
@@ -55,7 +56,7 @@ export async function renderTabs(keyword = "") {
       const closeBtn = document.createElement("button");
       closeBtn.className = "icon-button";
       closeBtn.textContent = "×";
-      closeBtn.title = "关闭标签";
+      closeBtn.title = t("closeTabBtnTitle");
       closeBtn.addEventListener("click", async (e) => {
         e.stopPropagation();
         await chrome.tabs.remove(tab.id);
@@ -81,7 +82,7 @@ export async function renderTabs(keyword = "") {
     });
 
     if (!filtered.length) {
-      tabList.innerHTML = '<div class="no-data">当前分组暂无匹配网站。</div>';
+      tabList.innerHTML = `<div class="no-data">${t("noMatchedGroupTabs")}</div>`;
       return;
     }
 
@@ -109,7 +110,7 @@ export async function renderTabs(keyword = "") {
       const editBtn = document.createElement("button");
       editBtn.className = "icon-button";
       editBtn.textContent = "✎";
-      editBtn.title = "编辑网址";
+      editBtn.title = t("editUrlBtnTitle");
       editBtn.addEventListener("click", async (e) => {
         e.stopPropagation();
         await editGroupItem(itemData.id);
@@ -119,7 +120,7 @@ export async function renderTabs(keyword = "") {
       const deleteBtn = document.createElement("button");
       deleteBtn.className = "icon-button";
       deleteBtn.textContent = "🗑";
-      deleteBtn.title = "删除网址";
+      deleteBtn.title = t("deleteUrlBtnTitle");
       deleteBtn.addEventListener("click", async (e) => {
         e.stopPropagation();
         await deleteGroupItem(itemData.id);
@@ -144,7 +145,7 @@ export async function addGroupItem(groupId, tab) {
   if (!target) return;
 
   if (target.items.some((item) => item.url === tab.url)) {
-    alert("此网址已存在于目标分组中。");
+    alert(t("urlExistsInGroup"));
     return;
   }
 
@@ -156,7 +157,7 @@ export async function addGroupItem(groupId, tab) {
   });
 
   await saveStoredGroups(state.groups);
-  alert(`已添加到分组「${target.name}」。`);
+  alert(t("addedToGroup", { name: target.name }));
 }
 
 function getMenuBounds() {
@@ -170,19 +171,19 @@ export function showAddToGroupMenu(x, y, tab) {
 
   const header = document.createElement("div");
   header.className = "group-menu-header";
-  header.textContent = "添加到分组";
+  header.textContent = t("addToGroupTitle");
   groupMenuEl.appendChild(header);
 
   if (!state.groups.length) {
     const empty = document.createElement("div");
     empty.className = "group-menu-item";
-    empty.textContent = "请先创建一个分组";
+    empty.textContent = t("noGroupHint");
     groupMenuEl.appendChild(empty);
   } else {
     state.groups.forEach((group) => {
       const item = document.createElement("div");
       item.className = "group-menu-item";
-      item.innerHTML = `<span>${group.name}</span><span class="menu-item-count">${group.items.length} 个</span>`;
+      item.innerHTML = `<span>${group.name}</span><span class="menu-item-count">${t("groupMenuCount", { count: group.items.length })}</span>`;
       item.addEventListener("click", async () => {
         await addGroupItem(group.id, tab);
         hideGroupMenu();
@@ -204,15 +205,6 @@ export function showAddToGroupMenu(x, y, tab) {
 
   groupMenuEl.style.left = `${left}px`;
   groupMenuEl.style.top = `${top}px`;
-}
-
-export async function closeOtherTabs() {
-  const [current] = await chrome.tabs.query({ active: true, currentWindow: true });
-  const allTabs = await chrome.tabs.query({ currentWindow: true });
-  const ids = allTabs.filter((tab) => tab.id !== current.id).map((tab) => tab.id);
-  if (ids.length) {
-    await chrome.tabs.remove(ids);
-  }
 }
 
 export async function closeDuplicateTabs() {

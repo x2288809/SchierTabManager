@@ -1,3 +1,5 @@
+import { t } from "./i18n.js";
+
 const dialogOverlay = document.getElementById("dialogOverlay");
 const dialogTitleEl = document.getElementById("dialogTitle");
 const dialogBodyEl = document.getElementById("dialogBody");
@@ -17,7 +19,7 @@ export function attachDialogEvents() {
   });
 }
 
-export function openDialog({ title, fields, confirmText = "确定" }) {
+export function openDialog({ title, fields, confirmText = t("dialogConfirm") }) {
   dialogTitleEl.textContent = title;
   dialogConfirmBtn.textContent = confirmText;
   dialogBodyEl.innerHTML = "";

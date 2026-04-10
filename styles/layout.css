@@ -1,3 +1,46 @@
+.global-actions {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+  margin-bottom: 12px;
+}
+
+.global-actions button {
+  padding: 8px 14px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.global-actions .primary {
+  background: #409eff;
+  color: #fff;
+}
+
+.global-actions .secondary {
+  background: #6c757d;
+  color: #fff;
+}
+
+.global-actions .import-btn {
+  background: #28a745;
+  color: #fff;
+}
+
+.global-actions .export-btn {
+  background: #0d6efd;
+  color: #fff;
+}
+
+.global-actions button:hover {
+  opacity: 0.92;
+}
+
+.language-btn {
+  min-width: 90px;
+}
+
 .group-list {
   display: flex;
   flex-direction: column;

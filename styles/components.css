@@ -17,7 +17,10 @@
   cursor: pointer;
   transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
   border: 1px solid rgba(66, 110, 249, 0.08);
-  min-height: 100px;
+  /* 1. 固定标签高度，取消最小高度 */
+  height: 100px;
+  /* 2. 开启相对定位，用于按钮绝对定位 */
+  position: relative;
 }
 
 .tab-item:hover {
@@ -30,7 +33,8 @@
   display: flex;
   align-items: center;
   gap: 12px;
-  min-height: 44px;
+  /* 移除最小高度，让内容自适应 */
+  height: 44px;
 }
 
 .tab-fav {
@@ -64,6 +68,7 @@
   text-overflow: ellipsis;
 }
 
+/* 关键修改：按钮容器改为绝对定位（悬浮在标签上） */
 .item-actions {
   display: flex;
   gap: 10px;
@@ -72,8 +77,18 @@
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.15s ease;
+  /* 绝对定位到标签右上角 */
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  /* 按钮容器背景（可选，增加可读性） */
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 8px;
+  padding: 4px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
+/* 鼠标悬浮时显示按钮 */
 .tab-item:hover .item-actions {
   opacity: 1;
   pointer-events: auto;
@@ -85,9 +100,16 @@
   color: #2d5dd7;
   cursor: pointer;
   font-size: 16px;
-  padding: 8px;
-  border-radius: 12px;
+  /* 缩小按钮尺寸，减少占用空间 */
+  padding: 6px;
+  border-radius: 8px;
   transition: background 0.15s ease, color 0.15s ease;
+  /* 按钮最小尺寸，保证点击区域 */
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .icon-button:hover {
