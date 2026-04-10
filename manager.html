@@ -1,0 +1,77 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>标签管理器 - SchierTabManager</title>
+  <link rel="stylesheet" href="styles/base.css">
+  <link rel="stylesheet" href="styles/layout.css">
+  <link rel="stylesheet" href="styles/components.css">
+  <link rel="stylesheet" href="styles/dialog.css">
+</head>
+<body>
+  <div class="wrapper">
+    <header>
+      <h1>🏷️ SchierTabManager 标签管理器</h1>
+      <div class="shortcut-note">快捷打开管理页：默认 Ctrl+Q，可在浏览器扩展快捷键设置中自定义。</div>
+    </header>
+
+    <div class="content">
+      <aside class="side-panel">
+        <div class="side-header">
+          <div>
+            <h2>分组管理</h2>
+            <p>管理你的标签分组</p>
+          </div>
+          <button id="addGroupBtn" class="primary">+ 新增分组</button>
+        </div>
+        <div id="groupList" class="group-list"></div>
+      </aside>
+
+      <main class="main-panel">
+        <div class="main-header">
+          <div>
+            <h2 id="groupTitle">已打开标签</h2>
+            <p id="groupHint" class="group-hint">右键已打开的标签，可直接添加到分组。</p>
+          </div>
+          <div class="group-actions">
+            <button id="addSiteBtn" class="secondary hidden"> 新增网站</button>
+          </div>
+        </div>
+
+        <div class="search-box">
+          <input id="search" placeholder="搜索标签标题或网址..." autocomplete="off" />
+        </div>
+
+        <div class="toolbar">
+          <button id="closeOthers">关闭其他标签</button>
+          <button id="closeDuplicate">去重标签</button>
+          <button id="refresh">刷新列表</button>
+          <button id="importGroups" class="secondary">导入数据</button>
+          <button id="exportGroups">导出数据</button>
+        </div>
+
+        <div class="container">
+          <div id="tabList" class="tab-list"></div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <input id="importFileInput" type="file" accept="application/json" hidden />
+  <div id="groupMenu" class="group-menu hidden"></div>
+  <div id="dialogOverlay" class="dialog-overlay hidden">
+    <div class="dialog-box">
+      <div class="dialog-header">
+        <div id="dialogTitle">提示</div>
+        <button id="dialogClose" class="dialog-close">×</button>
+      </div>
+      <div id="dialogBody" class="dialog-body"></div>
+      <div class="dialog-actions">
+        <button id="dialogCancel" class="secondary">取消</button>
+        <button id="dialogConfirm" class="primary">确定</button>
+      </div>
+    </div>
+  </div>
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>

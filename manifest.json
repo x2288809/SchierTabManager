@@ -1,0 +1,25 @@
+{
+  "manifest_version": 3,
+  "name": "SchierTabManager - 你的标签页管理器",
+  "version": "1.0.0",
+  "description": "一键管理、搜索、休眠、清理标签页，新标签页式管理界面",
+  "permissions": ["tabs", "storage", "activeTab"],
+  "action": {},
+  "commands": {
+    "open-manager": {
+      "suggested_key": {
+        "default": "Ctrl+Q",
+        "mac": "Command+Q"
+      },
+      "description": "打开标签页管理器"
+    }
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "icons": {
+    "16": "assets/icons/16.png",
+    "48": "assets/icons/48.png",
+    "128": "assets/icons/128.png"
+  }
+}

@@ -1,0 +1,136 @@
+.group-menu {
+  position: absolute;
+  width: 280px;
+  background: #fff;
+  border: 1px solid rgba(89, 113, 154, 0.16);
+  border-radius: 18px;
+  box-shadow: 0 22px 60px rgba(45, 73, 121, 0.16);
+  z-index: 20;
+  padding: 12px 0;
+  overflow: hidden;
+}
+
+.group-menu.hidden {
+  display: none;
+}
+
+.dialog-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(16, 31, 75, 0.35);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 30;
+  padding: 20px;
+}
+
+.dialog-box {
+  width: min(520px, 100%);
+  background: #fff;
+  border-radius: 22px;
+  box-shadow: 0 26px 80px rgba(36, 75, 160, 0.16);
+  overflow: hidden;
+}
+
+.dialog-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 24px;
+  background: #f8fbff;
+  border-bottom: 1px solid rgba(229, 234, 245, 0.95);
+}
+
+.dialog-header #dialogTitle {
+  font-size: 16px;
+  font-weight: 700;
+  color: #1b2b48;
+}
+
+.dialog-close {
+  border: none;
+  background: transparent;
+  font-size: 22px;
+  color: #556080;
+  cursor: pointer;
+}
+
+.dialog-body {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 22px 24px;
+}
+
+.dialog-row {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.dialog-label {
+  color: #344069;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.dialog-input {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid rgba(180, 186, 215, 0.75);
+  border-radius: 12px;
+  font-size: 14px;
+  outline: none;
+}
+
+.dialog-input:focus {
+  border-color: #5a84ff;
+  box-shadow: 0 0 0 4px rgba(64, 158, 255, 0.12);
+}
+
+.dialog-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  padding: 18px 24px 24px;
+  background: #fff;
+}
+
+.group-menu-header {
+  padding: 14px 16px;
+  font-weight: 700;
+  font-size: 14px;
+  color: #1b2b48;
+  border-bottom: 1px solid rgba(229, 234, 245, 0.95);
+  background: #f8fbff;
+}
+
+.group-menu-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  cursor: pointer;
+  color: #2c3b56;
+  font-size: 14px;
+  transition: 0.15s;
+}
+
+.group-menu-item:hover {
+  background: rgba(64, 158, 255, 0.08);
+}
+
+.group-menu-item .menu-item-count {
+  color: #5c7aed;
+  font-size: 12px;
+  background: rgba(92, 122, 237, 0.12);
+  border-radius: 999px;
+  padding: 2px 8px;
+}
+
+@media screen and (max-width: 980px) {
+  .tab-list {
+    grid-template-columns: 1fr;
+  }
+}
