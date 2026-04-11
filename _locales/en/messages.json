@@ -1,0 +1,170 @@
+{
+  "extensionName": {
+    "message": "SchierTabManager"
+  },
+  "extensionDescription": {
+    "message": "Manage, search, sleep, and clean tabs with a new-tab-style interface."
+  },
+  "title": {
+    "message": "Schier Tab Manager"
+  },
+  "appTitle": {
+    "message": "🏷️ Schier Tab Manager"
+  },
+  "shortcutNote": {
+    "message": "Toggle the manager page with Ctrl+Q by default. Customize in browser extension shortcut settings."
+  },
+  "groupManagement": {
+    "message": "Group Management"
+  },
+  "groupManagementHint": {
+    "message": "Manage your tab groups."
+  },
+  "addGroup": {
+    "message": "+ Add Group"
+  },
+  "openTabs": {
+    "message": "Open Tabs"
+  },
+  "groupHintOpenTabs": {
+    "message": "Hover tabs to show quick actions, then click + to add to a group."
+  },
+  "groupHintGroupContent": {
+    "message": "Viewing group content. Edit, delete, or manually add sites."
+  },
+  "addSite": {
+    "message": " Add Site"
+  },
+  "searchPlaceholder": {
+    "message": "Search tabs by title or URL..."
+  },
+  "searchEnginePlaceholder": {
+    "message": "Search web with Baidu, Google, Bing..."
+  },
+  "searchEngineButton": {
+    "message": "Search"
+  },
+  "closeDuplicate": {
+    "message": "Remove Duplicates"
+  },
+  "refresh": {
+    "message": "Refresh"
+  },
+  "importData": {
+    "message": "Import"
+  },
+  "exportData": {
+    "message": "Export"
+  },
+  "switchToEnglish": {
+    "message": "English"
+  },
+  "switchToChinese": {
+    "message": "中文(简体）"
+  },
+  "dialogTitle": {
+    "message": "Prompt"
+  },
+  "dialogCancel": {
+    "message": "Cancel"
+  },
+  "dialogConfirm": {
+    "message": "Confirm"
+  },
+  "defaultGroupName": {
+    "message": "Open Tabs"
+  },
+  "groupCount": {
+    "message": "{count} items"
+  },
+  "noMatchedTabs": {
+    "message": "No matching open tabs found."
+  },
+  "tabDropdownTitle": {
+    "message": "Add to Group"
+  },
+  "noGroupHint": {
+    "message": "Please create a group first."
+  },
+  "addToGroupTitle": {
+    "message": "Add to Group"
+  },
+  "addToGroupBtnTitle": {
+    "message": "Add to Group"
+  },
+  "closeTabBtnTitle": {
+    "message": "Close Tab"
+  },
+  "editUrlBtnTitle": {
+    "message": "Edit URL"
+  },
+  "deleteUrlBtnTitle": {
+    "message": "Delete URL"
+  },
+  "urlExistsInGroup": {
+    "message": "This URL already exists in the target group."
+  },
+  "addedToGroup": {
+    "message": "Added to group \"{name}\"."
+  },
+  "editGroup": {
+    "message": "Edit Group"
+  },
+  "deleteGroup": {
+    "message": "Delete Group"
+  },
+  "confirmDeleteGroup": {
+    "message": "Are you sure you want to delete this group? This action cannot be undone."
+  },
+  "newGroup": {
+    "message": "New Group"
+  },
+  "groupName": {
+    "message": "Group Name"
+  },
+  "enterGroupName": {
+    "message": "Enter group name"
+  },
+  "create": {
+    "message": "Create"
+  },
+  "save": {
+    "message": "Save"
+  },
+  "addWebsiteToGroup": {
+    "message": "Add Website to Group"
+  },
+  "websiteName": {
+    "message": "Website Name"
+  },
+  "enterWebsiteName": {
+    "message": "Enter website name"
+  },
+  "websiteUrl": {
+    "message": "Website URL"
+  },
+  "enterWebsiteUrl": {
+    "message": "Enter a full URL, e.g. https://example.com"
+  },
+  "add": {
+    "message": "Add"
+  },
+  "importConfirm": {
+    "message": "Importing will overwrite current local group data. Continue?"
+  },
+  "importSuccess": {
+    "message": "Group data imported successfully."
+  },
+  "importFail": {
+    "message": "Import failed: invalid file format."
+  },
+  "defaultGroupHint": {
+    "message": "Viewing group content. Edit, delete, or manually add sites."
+  },
+  "groupMenuCount": {
+    "message": "{count} items"
+  },
+  "noMatchedGroupTabs": {
+    "message": "No matching sites in this group."
+  }
+}

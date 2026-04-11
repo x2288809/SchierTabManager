@@ -14,6 +14,19 @@ export async function initGroups() {
   state.groups = await getStoredGroups();
 }
 
+async function reorderGroups(sourceGroupId, targetGroupId) {
+  if (sourceGroupId === targetGroupId) return;
+  const sourceIndex = state.groups.findIndex((group) => group.id === sourceGroupId);
+  const targetIndex = state.groups.findIndex((group) => group.id === targetGroupId);
+  if (sourceIndex === -1 || targetIndex === -1) return;
+
+  const [moved] = state.groups.splice(sourceIndex, 1);
+  const insertIndex = targetIndex;
+  state.groups.splice(insertIndex, 0, moved);
+
+  await saveStoredGroups(state.groups);
+}
+
 export async function renderGroupList() {
   const groupList = document.getElementById("groupList");
   const tabs = await getAllTabs();
@@ -48,6 +61,38 @@ function createGroupEntry(id, name, count, isDefault) {
   controls.className = "group-controls";
 
   if (!isDefault) {
+    entry.draggable = true;
+    entry.dataset.groupId = id;
+
+    entry.addEventListener("dragstart", (e) => {
+      e.dataTransfer.setData("text/plain", id);
+      e.dataTransfer.effectAllowed = "move";
+      entry.classList.add("dragging");
+    });
+
+    entry.addEventListener("dragend", () => {
+      entry.classList.remove("dragging");
+    });
+
+    entry.addEventListener("dragover", (e) => {
+      e.preventDefault();
+      e.dataTransfer.dropEffect = "move";
+      entry.classList.add("drag-over");
+    });
+
+    entry.addEventListener("dragleave", () => {
+      entry.classList.remove("drag-over");
+    });
+
+    entry.addEventListener("drop", async (e) => {
+      e.preventDefault();
+      entry.classList.remove("drag-over");
+      const sourceId = e.dataTransfer.getData("text/plain");
+      if (!sourceId || sourceId === id) return;
+      await reorderGroups(sourceId, id);
+      await renderGroupList();
+    });
+
     const editBtn = document.createElement("button");
     editBtn.textContent = "✎";
     editBtn.title = t("editGroup");

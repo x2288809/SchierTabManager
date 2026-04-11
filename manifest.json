@@ -1,8 +1,9 @@
 {
   "manifest_version": 3,
-  "name": "SchierTabManager - 你的标签页管理器",
+  "default_locale": "en",
+  "name": "__MSG_extensionName__",
   "version": "1.0.1",
-  "description": "管理、搜索、休眠、清理标签页，新标签页式管理界面",
+  "description": "__MSG_extensionDescription__",
   "permissions": ["tabs", "storage", "activeTab"],
   "action": {},
   "commands": {

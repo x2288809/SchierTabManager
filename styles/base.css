@@ -23,7 +23,7 @@ body {
   box-shadow: 0 32px 90px rgba(30, 63, 125, 0.14);
   /* 宽度：最大1360px，最小自适应，占满可用宽度 */
   width: 100%;
-  max-width: 1360px;
+  max-width: 1440px;
   /* 高度：占满上下5%空白后的剩余高度，最大90vh（刚好匹配5%上下） */
   height: 90vh;
   /* 移除不必要的max-height，用height:90vh直接匹配上下5%空白 */

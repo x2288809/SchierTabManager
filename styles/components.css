@@ -1,10 +1,13 @@
 .tab-list {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 12px;
+  gap: 10px;
   height: 100%;
   overflow-y: auto;
   padding-right: 6px;
+  align-content: start;
+  align-items: start;
+  grid-auto-rows: minmax(70px, auto);
 }
 
 .tab-item {
@@ -13,13 +16,12 @@
   justify-content: space-between;
   background: #fff;
   padding: 12px 14px;
-  border-radius: 16px;
+  border-radius: 10px;
   cursor: pointer;
   transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
-  border: 1px solid rgba(66, 110, 249, 0.08);
-  /* 1. 固定标签高度，取消最小高度 */
-  height: 100px;
-  /* 2. 开启相对定位，用于按钮绝对定位 */
+  border: 1.5px solid rgba(66, 110, 249, 0.08);
+  min-height: 70px;
+  height: auto;
   position: relative;
 }
 
@@ -27,6 +29,17 @@
   transform: translateY(-2px);
   box-shadow: 0 18px 40px rgba(49, 84, 167, 0.12);
   background: #f4f7ff;
+}
+
+.tab-item.drag-over,
+.group-entry.drag-over {
+  border-color: #409eff;
+  background: #eef5ff;
+}
+
+.tab-item.dragging,
+.group-entry.dragging {
+  opacity: 0.6;
 }
 
 .tab-meta {

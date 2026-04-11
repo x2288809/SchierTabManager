@@ -1,0 +1,170 @@
+{
+  "extensionName": {
+    "message": "SchierTabManager - 你的标签页管理器"
+  },
+  "extensionDescription": {
+    "message": "管理、搜索、休眠、清理标签页，新标签页式管理界面。"
+  },
+  "title": {
+    "message": "标签管理器 - SchierTabManager"
+  },
+  "appTitle": {
+    "message": "🏷️ SchierTabManager 标签管理器"
+  },
+  "shortcutNote": {
+    "message": "快捷打开/关闭管理页：默认 Ctrl+Q，可在浏览器扩展快捷键设置中自定义。"
+  },
+  "groupManagement": {
+    "message": "分组管理"
+  },
+  "groupManagementHint": {
+    "message": "管理你的标签分组"
+  },
+  "addGroup": {
+    "message": "+ 新增分组"
+  },
+  "openTabs": {
+    "message": "已打开标签"
+  },
+  "groupHintOpenTabs": {
+    "message": "悬停标签可显示快捷操作，点击 + 添加到分组。"
+  },
+  "groupHintGroupContent": {
+    "message": "当前为分组内容，可编辑、删除网站，或手动新增网址。"
+  },
+  "addSite": {
+    "message": " 新增网站"
+  },
+  "searchPlaceholder": {
+    "message": "搜索标签标题或网址..."
+  },
+  "searchEnginePlaceholder": {
+    "message": "搜索内容，支持百度、Google、Bing..."
+  },
+  "searchEngineButton": {
+    "message": "搜索"
+  },
+  "closeDuplicate": {
+    "message": "去重标签"
+  },
+  "refresh": {
+    "message": "刷新列表"
+  },
+  "importData": {
+    "message": "导入数据"
+  },
+  "exportData": {
+    "message": "导出数据"
+  },
+  "switchToEnglish": {
+    "message": "English"
+  },
+  "switchToChinese": {
+    "message": "中文(简体）"
+  },
+  "dialogTitle": {
+    "message": "提示"
+  },
+  "dialogCancel": {
+    "message": "取消"
+  },
+  "dialogConfirm": {
+    "message": "确定"
+  },
+  "defaultGroupName": {
+    "message": "已打开标签"
+  },
+  "groupCount": {
+    "message": "{count} 项"
+  },
+  "noMatchedTabs": {
+    "message": "当前没有匹配的已打开标签。"
+  },
+  "tabDropdownTitle": {
+    "message": "添加到分组"
+  },
+  "noGroupHint": {
+    "message": "请先创建一个分组"
+  },
+  "addToGroupTitle": {
+    "message": "添加到分组"
+  },
+  "addToGroupBtnTitle": {
+    "message": "添加到分组"
+  },
+  "closeTabBtnTitle": {
+    "message": "关闭标签"
+  },
+  "editUrlBtnTitle": {
+    "message": "编辑网址"
+  },
+  "deleteUrlBtnTitle": {
+    "message": "删除网址"
+  },
+  "urlExistsInGroup": {
+    "message": "此网址已存在于目标分组中。"
+  },
+  "addedToGroup": {
+    "message": "已添加到分组\"{name}\"。"
+  },
+  "editGroup": {
+    "message": "编辑分组"
+  },
+  "deleteGroup": {
+    "message": "删除分组"
+  },
+  "confirmDeleteGroup": {
+    "message": "确认删除此分组？此操作无法撤销。"
+  },
+  "newGroup": {
+    "message": "新增分组"
+  },
+  "groupName": {
+    "message": "分组名称"
+  },
+  "enterGroupName": {
+    "message": "请输入分组名称"
+  },
+  "create": {
+    "message": "创建"
+  },
+  "save": {
+    "message": "保存"
+  },
+  "addWebsiteToGroup": {
+    "message": "新增网站到分组"
+  },
+  "websiteName": {
+    "message": "网站名称"
+  },
+  "enterWebsiteName": {
+    "message": "请输入网站名称"
+  },
+  "websiteUrl": {
+    "message": "网站地址"
+  },
+  "enterWebsiteUrl": {
+    "message": "请输入完整网址，例如 https://example.com"
+  },
+  "add": {
+    "message": "添加"
+  },
+  "importConfirm": {
+    "message": "导入将覆盖当前本地分组数据，是否继续？"
+  },
+  "importSuccess": {
+    "message": "分组数据已导入。"
+  },
+  "importFail": {
+    "message": "导入失败：文件格式不正确。"
+  },
+  "defaultGroupHint": {
+    "message": "当前为分组内容，可编辑、删除网站，或手动新增网址。"
+  },
+  "groupMenuCount": {
+    "message": "{count} 个"
+  },
+  "noMatchedGroupTabs": {
+    "message": "当前分组暂无匹配网站。"
+  }
+}

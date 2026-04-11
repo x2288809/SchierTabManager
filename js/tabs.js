@@ -5,6 +5,20 @@ import { t } from "./i18n.js";
 
 const groupMenuEl = document.getElementById("groupMenu");
 
+async function reorderGroupItems(sourceItemId, targetItemId) {
+  const group = getSelectedGroup();
+  if (!group || !Array.isArray(group.items)) return;
+
+  const sourceIndex = group.items.findIndex((item) => item.id === sourceItemId);
+  const targetIndex = group.items.findIndex((item) => item.id === targetItemId);
+  if (sourceIndex === -1 || targetIndex === -1 || sourceIndex === targetIndex) return;
+
+  const [moved] = group.items.splice(sourceIndex, 1);
+  const insertIndex = targetIndex;
+  group.items.splice(insertIndex, 0, moved);
+  await saveStoredGroups(state.groups);
+}
+
 export async function renderTabs(keyword = "") {
   const tabList = document.getElementById("tabList");
   tabList.innerHTML = "";
@@ -89,6 +103,37 @@ export async function renderTabs(keyword = "") {
     filtered.forEach((itemData) => {
       const item = document.createElement("div");
       item.className = "tab-item";
+      item.draggable = true;
+      item.dataset.itemId = itemData.id;
+
+      item.addEventListener("dragstart", (e) => {
+        e.dataTransfer.setData("text/plain", itemData.id);
+        e.dataTransfer.effectAllowed = "move";
+        item.classList.add("dragging");
+      });
+
+      item.addEventListener("dragend", () => {
+        item.classList.remove("dragging");
+      });
+
+      item.addEventListener("dragover", (e) => {
+        e.preventDefault();
+        e.dataTransfer.dropEffect = "move";
+        item.classList.add("drag-over");
+      });
+
+      item.addEventListener("dragleave", () => {
+        item.classList.remove("drag-over");
+      });
+
+      item.addEventListener("drop", async (e) => {
+        e.preventDefault();
+        item.classList.remove("drag-over");
+        const sourceId = e.dataTransfer.getData("text/plain");
+        if (!sourceId || sourceId === itemData.id) return;
+        await reorderGroupItems(sourceId, itemData.id);
+        await renderTabs(keyword);
+      });
 
       const meta = document.createElement("div");
       meta.className = "tab-meta";
