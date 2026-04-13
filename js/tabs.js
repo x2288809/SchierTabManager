@@ -2,6 +2,7 @@ import { state } from "./state.js";
 import { DEFAULT_GROUP_ID, defaultIcon, formatUrl, getAllTabs, saveStoredGroups } from "./storage.js";
 import { getSelectedGroup, editGroupItem, deleteGroupItem, hideGroupMenu } from "./groupManager.js";
 import { t } from "./i18n.js";
+import { showToast } from "./dialog.js";
 
 const groupMenuEl = document.getElementById("groupMenu");
 
@@ -190,7 +191,7 @@ export async function addGroupItem(groupId, tab) {
   if (!target) return;
 
   if (target.items.some((item) => item.url === tab.url)) {
-    alert(t("urlExistsInGroup"));
+    showToast(t("urlExistsInGroup"), "warning");
     return;
   }
 
@@ -202,7 +203,7 @@ export async function addGroupItem(groupId, tab) {
   });
 
   await saveStoredGroups(state.groups);
-  alert(t("addedToGroup", { name: target.name }));
+  showToast(t("addedToGroup", { name: target.name }), "success");
 }
 
 function getMenuBounds() {
@@ -239,17 +240,12 @@ export function showAddToGroupMenu(x, y, tab) {
   }
 
   const { width, height } = getMenuBounds();
-  let left = x;
-  let top = y;
-  if (left + width > window.innerWidth - 12) {
-    left = Math.max(window.innerWidth - width - 12, 12);
-  }
-  if (top + height > window.innerHeight - 12) {
-    top = Math.max(window.innerHeight - height - 12, 12);
-  }
+  const left = Math.max((window.innerWidth - width) / 2, 12);
+  const top = Math.max((window.innerHeight - height) / 2, 12);
 
   groupMenuEl.style.left = `${left}px`;
   groupMenuEl.style.top = `${top}px`;
+  groupMenuEl.style.transform = "none";
 }
 
 export async function closeDuplicateTabs() {

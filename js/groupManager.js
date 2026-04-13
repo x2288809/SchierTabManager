@@ -1,6 +1,6 @@
 import { state } from "./state.js";
 import { DEFAULT_GROUP_ID, DEFAULT_GROUP_NAME, getStoredGroups, saveStoredGroups, getAllTabs } from "./storage.js";
-import { openDialog } from "./dialog.js";
+import { openDialog, openConfirm, showToast } from "./dialog.js";
 import { t } from "./i18n.js";
 
 export function getSelectedGroup() {
@@ -153,6 +153,9 @@ export async function addGroup() {
   state.groups.push(newGroup);
   await saveStoredGroups(state.groups);
   state.selectedGroupId = newGroup.id;
+  await renderGroupList();
+  renderHeader();
+  showToast(t("addGroupSuccess"), "success");
 }
 
 export async function editGroup(id) {
@@ -171,16 +174,33 @@ export async function editGroup(id) {
 
   group.name = values.name;
   await saveStoredGroups(state.groups);
+  await renderGroupList();
+  renderHeader();
+  showToast(t("editGroupSuccess"), "success");
 }
 
 export async function deleteGroup(id) {
-  if (!confirm(t("confirmDeleteGroup"))) return;
+  const confirmed = await openConfirm({
+    titleKey: "deleteGroup",
+    messageKey: "confirmDeleteGroup",
+    confirmKey: "deleteGroupConfirmBtn",
+    cancelKey: "dialogCancel"
+  });
+  if (!confirmed) return;
 
-  state.groups = state.groups.filter((group) => group.id !== id);
-  await saveStoredGroups(state.groups);
+  try {
+    state.groups = state.groups.filter((group) => group.id !== id);
+    await saveStoredGroups(state.groups);
 
-  if (state.selectedGroupId === id) {
-    state.selectedGroupId = DEFAULT_GROUP_ID;
+    if (state.selectedGroupId === id) {
+      state.selectedGroupId = DEFAULT_GROUP_ID;
+    }
+
+    await renderGroupList();
+    renderHeader();
+    showToast(t("deleteGroupSuccess"), "success");
+  } catch (error) {
+    showToast(t("deleteGroupFail"), "warning");
   }
 }
 
@@ -214,6 +234,7 @@ export async function addSiteToCurrentGroup() {
 
   group.items.unshift(item);
   await saveStoredGroups(state.groups);
+  showToast(t("addWebsiteSuccess"), "success");
 }
 
 export async function editGroupItem(itemId) {
@@ -240,12 +261,30 @@ export async function editGroupItem(itemId) {
   item.title = values.title.trim();
   item.url = url;
   await saveStoredGroups(state.groups);
+  showToast(t("editUrlSuccess"), "success");
 }
 
 export async function deleteGroupItem(itemId) {
-  const group = getSelectedGroup();
-  group.items = group.items.filter((item) => item.id !== itemId);
-  await saveStoredGroups(state.groups);
+  const confirmed = await openConfirm({
+    titleKey: "deleteUrlBtnTitle",
+    messageKey: "confirmDeleteUrl",
+    confirmKey: "deleteUrlConfirmBtn",
+    cancelKey: "dialogCancel"
+  });
+  if (!confirmed) return;
+
+  try {
+    const group = getSelectedGroup();
+    if (!group) {
+      showToast(t("deleteUrlFail"), "warning");
+      return;
+    }
+    group.items = group.items.filter((item) => item.id !== itemId);
+    await saveStoredGroups(state.groups);
+    showToast(t("deleteUrlSuccess"), "success");
+  } catch (error) {
+    showToast(t("deleteUrlFail"), "warning");
+  }
 }
 
 export async function exportGroups() {

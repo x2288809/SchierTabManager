@@ -1,5 +1,5 @@
 .group-menu {
-  position: absolute;
+  position: fixed;
   width: 280px;
   background: #fff;
   border: 1px solid rgba(89, 113, 154, 0.16);
@@ -12,6 +12,40 @@
 
 .group-menu.hidden {
   display: none;
+}
+
+.toast {
+  position: fixed;
+  z-index: 9999;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  min-width: 260px;
+  max-width: 90%;
+  padding: 14px 18px;
+  border-radius: 16px;
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.18);
+  text-align: center;
+  color: #fff;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  opacity: 0.98;
+}
+
+.toast.hidden {
+  display: none;
+}
+
+.toast-info {
+  background: #1b2c66;
+}
+
+.toast-success {
+  background: #28a745;
+}
+
+.toast-warning {
+  background: #d9534f;
 }
 
 .dialog-overlay {
@@ -87,6 +121,54 @@
 .dialog-input:focus {
   border-color: #5a84ff;
   box-shadow: 0 0 0 4px rgba(64, 158, 255, 0.12);
+}
+
+.dialog-message {
+  color: #344069;
+  font-size: 15px;
+  line-height: 1.7;
+  padding: 10px 0;
+}
+
+.dialog-actions button {
+  min-width: 90px;
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+}
+
+.dialog-actions .secondary {
+  background: #f2f4f7;
+  color: #344069;
+  border: 1px solid #d8e0ee;
+}
+
+.dialog-actions .secondary:hover {
+  background: #e7ecf5;
+}
+
+#dialogCancel {
+  background: #f2f4f7;
+  color: #344069;
+  border: 1px solid #d8e0ee;
+}
+
+#dialogCancel:hover {
+  background: #e7ecf5;
+}
+
+.dialog-actions .primary.danger {
+  background: #dc3545;
+  border: 1px solid #c82333;
+}
+
+.dialog-actions .primary.danger:hover {
+  background: #c82333;
+}
+
+.dialog-actions .primary.danger:active {
+  background: #bd2130;
 }
 
 .dialog-actions {

@@ -131,6 +131,42 @@
   "save": {
     "message": "Save"
   },
+  "delete": {
+    "message": "Delete"
+  },
+  "deleteGroupConfirmBtn": {
+    "message": "Delete"
+  },
+  "deleteUrlConfirmBtn": {
+    "message": "Delete"
+  },
+  "confirmDeleteUrl": {
+    "message": "Are you sure you want to delete this URL? This action cannot be undone."
+  },
+  "deleteGroupSuccess": {
+    "message": "Group deleted."
+  },
+  "deleteGroupFail": {
+    "message": "Failed to delete group."
+  },
+  "editGroupSuccess": {
+    "message": "Group saved."
+  },
+  "deleteUrlSuccess": {
+    "message": "URL deleted."
+  },
+  "deleteUrlFail": {
+    "message": "Failed to delete URL."
+  },
+  "editUrlSuccess": {
+    "message": "URL saved."
+  },
+  "addGroupSuccess": {
+    "message": "Group created."
+  },
+  "addWebsiteSuccess": {
+    "message": "Website added to group."
+  },
   "addWebsiteToGroup": {
     "message": "Add Website to Group"
   },

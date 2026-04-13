@@ -7,7 +7,7 @@
   justify-content: flex-end;
   align-items: center;
   background: rgba(255, 255, 255, 0.96);
-  border-radius: 18px;
+  border-radius: 15px;
   padding: 10px;
   box-shadow: 0 14px 34px rgba(0, 0, 0, 0.16);
   z-index: 1000;
@@ -16,7 +16,7 @@
 .global-actions button {
   padding: 8px 14px;
   border: none;
-  border-radius: 10px;
+  border-radius: 8px;
   cursor: pointer;
   transition: 0.2s;
 }
@@ -208,6 +208,18 @@
   gap: 10px;
   margin-bottom: 16px;
   flex-wrap: wrap;
+}
+
+.group-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+#addSiteBtn {
+  background: #28a745;
+  color: #fff;
 }
 
 .toolbar button:hover,

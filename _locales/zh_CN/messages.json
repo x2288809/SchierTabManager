@@ -131,6 +131,42 @@
   "save": {
     "message": "保存"
   },
+  "delete": {
+    "message": "删除"
+  },
+  "deleteGroupConfirmBtn": {
+    "message": "删除"
+  },
+  "deleteUrlConfirmBtn": {
+    "message": "删除"
+  },
+  "confirmDeleteUrl": {
+    "message": "确认删除此网址？此操作无法撤销。"
+  },
+  "deleteGroupSuccess": {
+    "message": "分组删除成功"
+  },
+  "deleteGroupFail": {
+    "message": "删除分组失败"
+  },
+  "editGroupSuccess": {
+    "message": "分组保存成功"
+  },
+  "deleteUrlSuccess": {
+    "message": "标签删除成功"
+  },
+  "deleteUrlFail": {
+    "message": "删除标签失败"
+  },
+  "editUrlSuccess": {
+    "message": "标签修改成功"
+  },
+  "addGroupSuccess": {
+    "message": "分组创建成功"
+  },
+  "addWebsiteSuccess": {
+    "message": "网站新增成功"
+  },
   "addWebsiteToGroup": {
     "message": "新增网站到分组"
   },
