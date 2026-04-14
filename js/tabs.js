@@ -20,6 +20,28 @@ async function reorderGroupItems(sourceItemId, targetItemId) {
   await saveStoredGroups(state.groups);
 }
 
+async function copyTabCookies(tab) {
+  if (!tab.url) {
+    showToast(t("copyCookieFail"), "warning");
+    return;
+  }
+
+  try {
+    const cookies = await chrome.cookies.getAll({ url: tab.url });
+    if (!cookies || !cookies.length) {
+      showToast(t("copyCookieNoCookies"), "warning");
+      return;
+    }
+
+    const cookieString = cookies.map((cookie) => `${cookie.name}=${cookie.value}`).join("; ");
+    await navigator.clipboard.writeText(cookieString);
+    showToast(t("copyCookieSuccess"), "success");
+  } catch (error) {
+    console.error("copyTabCookies error:", error);
+    showToast(t("copyCookieFail"), "warning");
+  }
+}
+
 export async function renderTabs(keyword = "") {
   const tabList = document.getElementById("tabList");
   tabList.innerHTML = "";
@@ -68,6 +90,15 @@ export async function renderTabs(keyword = "") {
         showAddToGroupMenu(e.pageX, e.pageY, tab);
       });
 
+      const cookieBtn = document.createElement("button");
+      cookieBtn.className = "icon-button get-cookie";
+      cookieBtn.textContent = "🍪";
+      cookieBtn.title = t("getCookieBtnTitle");
+      cookieBtn.addEventListener("click", async (e) => {
+        e.stopPropagation();
+        await copyTabCookies(tab);
+      });
+
       const closeBtn = document.createElement("button");
       closeBtn.className = "icon-button";
       closeBtn.textContent = "×";
@@ -78,7 +109,7 @@ export async function renderTabs(keyword = "") {
         window.dispatchEvent(new CustomEvent("tabListChanged"));
       });
 
-      action.append(addBtn, closeBtn);
+      action.append(addBtn, cookieBtn, closeBtn);
 
       item.addEventListener("click", (e) => {
         if (e.target === closeBtn || e.target === addBtn) return;

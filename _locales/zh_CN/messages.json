@@ -47,6 +47,9 @@
   "closeDuplicate": {
     "message": "去重标签"
   },
+  "newBlankTab": {
+    "message": "新建标签页"
+  },
   "refresh": {
     "message": "刷新列表"
   },
@@ -166,6 +169,18 @@
   },
   "addWebsiteSuccess": {
     "message": "网站新增成功"
+  },
+  "getCookieBtnTitle": {
+    "message": "获取 Cookie"
+  },
+  "copyCookieSuccess": {
+    "message": "Cookie 已复制到剪贴板。"
+  },
+  "copyCookieFail": {
+    "message": "复制 Cookie 失败。"
+  },
+  "copyCookieNoCookies": {
+    "message": "该网站没有可复制的 Cookie。"
   },
   "addWebsiteToGroup": {
     "message": "新增网站到分组"

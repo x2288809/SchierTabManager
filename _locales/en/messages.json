@@ -47,6 +47,9 @@
   "closeDuplicate": {
     "message": "Remove Duplicates"
   },
+  "newBlankTab": {
+    "message": "New Blank Tab"
+  },
   "refresh": {
     "message": "Refresh"
   },
@@ -166,6 +169,18 @@
   },
   "addWebsiteSuccess": {
     "message": "Website added to group."
+  },
+  "getCookieBtnTitle": {
+    "message": "Get Cookie"
+  },
+  "copyCookieSuccess": {
+    "message": "Cookie copied to clipboard."
+  },
+  "copyCookieFail": {
+    "message": "Failed to copy cookie."
+  },
+  "copyCookieNoCookies": {
+    "message": "No cookies available for this site."
   },
   "addWebsiteToGroup": {
     "message": "Add Website to Group"

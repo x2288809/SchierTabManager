@@ -140,6 +140,16 @@
   color: #195422;
 }
 
+.icon-button.get-cookie {
+  background: rgba(255, 193, 7, 0.14);
+  color: #8a6d0b;
+}
+
+.icon-button.get-cookie:hover {
+  background: rgba(255, 193, 7, 0.24);
+  color: #5d4510;
+}
+
 .shortcut-note {
   margin-top: 8px;
   color: #4d6bbd;

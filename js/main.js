@@ -56,6 +56,11 @@ function attachEvents() {
     await renderTabs(state.currentSearch);
   });
 
+  document.getElementById("newBlankTab").addEventListener("click", async () => {
+    await chrome.tabs.create({ url: "edge://newtab/" });
+    await renderTabs(state.currentSearch);
+  });
+
   document.getElementById("search").addEventListener("input", async (e) => {
     state.currentSearch = e.target.value;
     await renderTabs(state.currentSearch);
