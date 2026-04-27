@@ -177,7 +177,7 @@ export async function renderTabs(keyword = "") {
 
       const info = document.createElement("div");
       info.className = "tab-info";
-      info.innerHTML = `<div class="tab-title">${itemData.title}</div><div class="tab-url">${formatUrl(itemData.url)}</div>`;
+      info.innerHTML = `<div class="tab-title">${itemData.title}</div><div class="tab-url">${formatUrl(itemData.url)}</div><div class="tab-clicks">点击次数: ${itemData.clickCount || 0}</div>`;
 
       meta.append(fav, info);
 
@@ -206,7 +206,9 @@ export async function renderTabs(keyword = "") {
 
       action.append(editBtn, deleteBtn);
 
-      item.addEventListener("click", () => {
+      item.addEventListener("click", async () => {
+        itemData.clickCount = (itemData.clickCount || 0) + 1;
+        await saveStoredGroups(state.groups);
         chrome.tabs.create({ url: itemData.url });
         window.close();
       });
@@ -230,7 +232,8 @@ export async function addGroupItem(groupId, tab) {
     id: Date.now().toString(),
     title: tab.title || tab.url,
     url: tab.url,
-    favIconUrl: tab.favIconUrl || defaultIcon
+    favIconUrl: tab.favIconUrl || defaultIcon,
+    clickCount: 0
   });
 
   await saveStoredGroups(state.groups);

@@ -20,7 +20,7 @@
   cursor: pointer;
   transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
   border: 1.5px solid rgba(66, 110, 249, 0.08);
-  min-height: 70px;
+  min-height: 75px;
   height: auto;
   position: relative;
 }
@@ -79,6 +79,12 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.tab-clicks {
+  color: #999;
+  font-size: 11px;
+  margin-top: 4px;
 }
 
 /* 关键修改：按钮容器改为绝对定位（悬浮在标签上） */

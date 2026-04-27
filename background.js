@@ -23,7 +23,6 @@ async function toggleManagerPage() {
   }
 }
 
-// 替换原有 openManagerPage 函数
 async function openManagerPage() {
   const tabs = await chrome.tabs.query({ url: managerUrl });
   if (tabs.length) {
@@ -46,7 +45,6 @@ chrome.commands.onCommand.addListener((command) => {
   }
 });
 
-// 其余代码保持不变...
 chrome.tabs.onActivated.addListener(async (activeInfo) => {
   const activeTab = await chrome.tabs.get(activeInfo.tabId);
   if (isManagerTab(activeTab)) return;
